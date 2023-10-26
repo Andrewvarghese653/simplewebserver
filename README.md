@@ -1,6 +1,6 @@
 # EX01 Developing a Simple Webserver
 ## Date:
-
+19/10/23
 ## AIM:
 To develop a simple webserver to serve html pages.
 
@@ -21,30 +21,41 @@ Serving the HTML pages.
 Testing the webserver.
 
 ## PROGRAM:
-```html
+```
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Top 5 Software Companies</title>
+<title>Top 5 Revenue Company</title>
 </head>
 <body>
-    <h1>Top 5 Software Companies by Revenue</h1>
-    <ol>
-        <li>Microsoft</li>
-        <li>Apple</li>
-        <li>Amazon</li>
-        <li>Alphabet (Google)</li>
-        <li>Facebook</li>
-    </ol>
+<h1><u>Top 5 Revenue Company</u><h1>
+<ul>
+<li>Apple</li>
+<li>Microsoft</li>
+<li>Mi</li>
+<li>BlueBerry</li>
+<li>Google</li>
 </body>
 </html>
+"""
+class myhandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("request received")
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+server_address = ('',8000)
+httpd = HTTPServer(server_address,myhandler)
+print("my webserver is running...")
+httpd.serve_forever()
 ```
-
-
 ## OUTPUT:
+<img width="1440" alt="Screenshot 2023-10-26 at 8 29 46 AM" src="https://github.com/Andrewvarghese653/simplewebserver/assets/145822115/631113f7-1ac5-43fd-9cf6-ec1dc99ab7f8">
+<img width="1440" alt="Screenshot 2023-10-26 at 8 30 14 AM" src="https://github.com/Andrewvarghese653/simplewebserver/assets/145822115/f0620f51-26b7-40eb-b6a5-f1baceba0ca2">
 
-<img width="469" alt="Screenshot 2023-10-11 at 8 10 35 PM" src="https://github.com/Andrewvarghese653/simplewebserver/assets/145822115/43c5a570-d10a-4c73-b4df-daed11daa620">
 
 
 
